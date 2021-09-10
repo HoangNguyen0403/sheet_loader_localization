@@ -1,0 +1,14 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - lib/generated/intl/*.dart
+    - lib/**/*.g.dart
+    - lib/utils/multi-languages/*.dart
+
+linter:
+  rules:
+    overridden_fields: false
+    prefer_const_constructors: true
+    use_key_in_widget_constructors: false
+    avoid_function_literals_in_foreach_calls: false
