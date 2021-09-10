@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:google_sheet_localization_generator/sheet_localization_generator.dart';
+import 'package:sheet_loader_localization/sheet_loader_localization.dart';
 part "locale_keys.g.dart";
 
 @SheetLocalization(

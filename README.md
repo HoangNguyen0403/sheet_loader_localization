@@ -1,6 +1,6 @@
-# google_sheet_localization_generator
+# sheet_loader_localization
 
-## Google Sheet Localization Generator
+## Sheet Localization Generator
 
 Download CSV file and generates the localization keys from an online Google Sheet to working
 with [easy_localization](https://pub.dev/packages/easy_localization)

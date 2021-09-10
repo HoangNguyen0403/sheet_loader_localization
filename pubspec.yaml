@@ -2,8 +2,8 @@ name: sheet_loader_localization
 description: Download an CSV file and generates the localization keys from an online Google Sheet.
 version: 0.0.1
 homepage: https://github.com/Hoang-Nguyenn
-repository: https://github.com/Hoang-Nguyenn/google_sheet_localization_loader
-issue_tracker: https://github.com/Hoang-Nguyenn/google_sheet_localization_loader/issues
+repository: https://github.com/Hoang-Nguyenn/sheet_loader_localization
+issue_tracker: https://github.com/Hoang-Nguyenn/sheet_loader_localization/issues
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
