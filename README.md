@@ -20,7 +20,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: <last_version>
-  google_sheet_localization_generator: <last_version>
+  sheet_loader_localization: <last_version>
 ```
 
 ### 🔌 Usage
@@ -73,7 +73,7 @@ flutter pub run build_runner build
 ```
 
 Sample
-of [locale_keys.g.dart](https://github.com/Hoang-Nguyenn/google_sheet_localization_loader/blob/main/example/lib/utils/multi-languages/locale_keys.g.dart)
+of [locale_keys.g.dart](https://github.com/Hoang-Nguyenn/sheet_loader_localization/blob/main/example/lib/utils/multi-languages/locale_keys.g.dart)
 
 #### 4. Configure your app
 
