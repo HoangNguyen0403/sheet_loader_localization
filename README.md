@@ -30,11 +30,11 @@ dev_dependencies:
 Create a sheet with your translations (following the bellow
 format, [an example sheet is available here](https://docs.google.com/spreadsheets/d/1v2Y3e0Uvn0JTwHvsduNT70u7Fy9TG43DIcZYJxPu1ZA/edit?usp=sharing)) :
 
-![csv example file](csv_example.png)
+![csv example file](https://github.com/Hoang-Nguyenn/sheet_loader_localization/raw/main/csv_example.png)
 
 Make sure that your sheet is shared :
 
-![share](share.png)
+![share](https://github.com/Hoang-Nguyenn/sheet_loader_localization/raw/main/share.png)
 
 Extract from the link the `DOCID`
 value : `https://docs.google.com/spreadsheets/d/<DOCID>/edit?usp=sharing`) :
@@ -47,7 +47,7 @@ sheet in a `lib/utils/multi-languages/locale_keys.dart` file :
 ```dart
 import 'dart:ui';
 
-import 'package:sheet_localization_generator/sheet_localization_generator.dart';
+import 'package:sheet_loader_localization/sheet_loader_localization.dart';
 
 part 'locale_keys.g.dart';
 

@@ -12,14 +12,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  build: ^2.1.0
+  build: ^2.1.1
   build_config: ^1.0.0
   source_gen: ^1.1.1
   http: ^0.13.3
   path: ^1.8.0
   csv: ^5.0.0
   intl: ^0.17.0
-  analyzer: ^2.3.0
+  analyzer: ^2.4.0
 
 dev_dependencies:
   flutter_test:
