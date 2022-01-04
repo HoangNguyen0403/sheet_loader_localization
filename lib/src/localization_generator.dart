@@ -19,44 +19,55 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
 
   Future<String> _generateSource(
       Element element, ConstantReader annotation) async {
-    final headers = {
-      'Content-Type': 'text/csv; charset=utf-8',
-      'Accept': '*/*'
-    };
-    final response = await http.get(
-        Uri.parse(
-            "https://docs.google.com/spreadsheets/export?format=csv&id=${annotation.read('docId').stringValue}"),
-        headers: headers);
-    final classBuilder = StringBuffer();
-    classBuilder.writeln(
-        '// Generated at: ${_formatDateWithOffset(DateTime.now().toLocal())}');
-    classBuilder.writeln('class ${element.displayName.substring(1)}{');
-    if (response.statusCode == 200) {
-      final outputDir = annotation.read('outDir').stringValue;
-      final outputFileName = annotation.read('outName').stringValue;
-      final preservedKeywords = annotation
-          .read('preservedKeywords')
-          .listValue
-          .map((e) => e.toStringValue())
-          .toList();
-      final current = Directory.current;
-      final output = Directory.fromUri(Uri.parse(outputDir));
-      final outputPath =
-          Directory(path.join(current.path, output.path, outputFileName));
+    try {
+      final headers = {
+        'Content-Type': 'text/csv; charset=utf-8',
+        'Accept': '*/*'
+      };
+      final response = await http.get(
+          Uri.parse(
+              "https://docs.google.com/spreadsheets/export?format=csv&id=${annotation
+                  .read('docId')
+                  .stringValue}"),
+          headers: headers);
+      final classBuilder = StringBuffer();
+      classBuilder.writeln(
+          '// Generated at: ${_formatDateWithOffset(
+              DateTime.now().toLocal())}');
+      classBuilder.writeln('class ${element.displayName.substring(1)}{');
+      if (response.statusCode == 200) {
+        final outputDir = annotation
+            .read('outDir')
+            .stringValue;
+        final outputFileName = annotation
+            .read('outName')
+            .stringValue;
+        final preservedKeywords = annotation
+            .read('preservedKeywords')
+            .listValue
+            .map((e) => e.toStringValue())
+            .toList();
+        final current = Directory.current;
+        final output = Directory.fromUri(Uri.parse(outputDir));
+        final outputPath =
+        Directory(path.join(current.path, output.path, outputFileName));
 
-      final generatedFile = File(outputPath.path);
-      if (!generatedFile.existsSync()) {
-        generatedFile.createSync(recursive: true);
+        final generatedFile = File(outputPath.path);
+        if (!generatedFile.existsSync()) {
+          generatedFile.createSync(recursive: true);
+        }
+        generatedFile.writeAsBytesSync(response.bodyBytes);
+        final csvParser = _CSVParser(response.body);
+        classBuilder.writeln(csvParser._supportedLocales);
+        classBuilder.writeln(csvParser._getLocaleKeys(preservedKeywords));
+      } else {
+        throw Exception('http reasonPhrase: ${response.reasonPhrase}');
       }
-      generatedFile.writeAsBytesSync(response.bodyBytes);
-      final csvParser = _CSVParser(response.body);
-      classBuilder.writeln(csvParser._supportedLocales);
-      classBuilder.writeln(csvParser._getLocaleKeys(preservedKeywords));
-    } else {
-      throw Exception('http reasonPhrase: ${response.reasonPhrase}');
+      classBuilder.writeln('}');
+      return classBuilder.toString();
+    } catch(e) {
+      throw Exception('Generator parse error. Please check sheet column data has correct or not! Maybe someone add more column than you need!');
     }
-    classBuilder.writeln('}');
-    return classBuilder.toString();
   }
 
   String _formatDateWithOffset(DateTime date,

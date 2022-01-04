@@ -100,9 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Spacer(
               flex: 1,
             ),
-            Text(
-                LocaleKeys.supportedLanguage
-                    .tr(args: [LocaleKeys.supportedLocales.length.toString()]),
+            Text("",
                 style: TextStyle(
                     color: Colors.grey.shade600,
                     fontSize: 19,
@@ -111,14 +109,14 @@ class _MyHomePageState extends State<MyHomePage> {
               flex: 1,
             ),
             Text(
-              LocaleKeys.gender,
+              "LocaleKeys.gender",
               style: TextStyle(
                   color: Colors.grey.shade600,
                   fontSize: 19,
                   fontWeight: FontWeight.bold),
             ).tr(args: ['aissat'], gender: _gender ? 'female' : 'male'),
             Text(
-              tr(LocaleKeys.gender, gender: _gender ? 'female' : 'male'),
+              "",
               style: TextStyle(
                   color: Colors.grey.shade600,
                   fontSize: 15,
@@ -138,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(LocaleKeys.msg).tr(args: ['aissat', 'Flutter']),
             const Text(LocaleKeys.msgNamed)
                 .tr(namedArgs: {'lang': 'Dart'}, args: ['Easy localization']),
-            const Text(LocaleKeys.clicked).plural(counter),
+            const Text(""),
             ElevatedButton(
               onPressed: () {
                 incrementCounter();
@@ -148,10 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(
               height: 15,
             ),
-            Text(
-                plural(LocaleKeys.amount, counter,
-                    format: NumberFormat.currency(
-                        locale: Intl.defaultLocale, symbol: '€')),
+            Text("",
                 style: TextStyle(
                     color: Colors.grey.shade900,
                     fontSize: 18,
@@ -163,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 context.deleteSaveLocale();
               },
-              child: const Text(LocaleKeys.resetLocale).tr(),
+              child: const Text(""),
             ),
             const Spacer(
               flex: 1,
