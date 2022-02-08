@@ -70,6 +70,10 @@ Run the following command to generate a `lib/utils/multi-languages/locale_keys.d
 
 ```
 flutter pub run build_runner build
+
+or 
+
+flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
 Sample
