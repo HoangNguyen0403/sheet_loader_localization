@@ -6,3 +6,5 @@
 - Update readme 
 ## 0.0.4
 - Update version library, update error console log when parse error sheet column data 
+## 0.0.5
+- Update version library, Using Flutter 2.10.0 
