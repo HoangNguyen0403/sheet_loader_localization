@@ -26,22 +26,15 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
       };
       final response = await http.get(
           Uri.parse(
-              "https://docs.google.com/spreadsheets/export?format=csv&id=${annotation
-                  .read('docId')
-                  .stringValue}"),
+              "https://docs.google.com/spreadsheets/export?format=csv&id=${annotation.read('docId').stringValue}"),
           headers: headers);
       final classBuilder = StringBuffer();
       classBuilder.writeln(
-          '// Generated at: ${_formatDateWithOffset(
-              DateTime.now().toLocal())}');
+          '// Generated at: ${_formatDateWithOffset(DateTime.now().toLocal())}');
       classBuilder.writeln('class ${element.displayName.substring(1)}{');
       if (response.statusCode == 200) {
-        final outputDir = annotation
-            .read('outDir')
-            .stringValue;
-        final outputFileName = annotation
-            .read('outName')
-            .stringValue;
+        final outputDir = annotation.read('outDir').stringValue;
+        final outputFileName = annotation.read('outName').stringValue;
         final preservedKeywords = annotation
             .read('preservedKeywords')
             .listValue
@@ -50,7 +43,7 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
         final current = Directory.current;
         final output = Directory.fromUri(Uri.parse(outputDir));
         final outputPath =
-        Directory(path.join(current.path, output.path, outputFileName));
+            Directory(path.join(current.path, output.path, outputFileName));
 
         final generatedFile = File(outputPath.path);
         if (!generatedFile.existsSync()) {
@@ -65,8 +58,9 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
       }
       classBuilder.writeln('}');
       return classBuilder.toString();
-    } catch(e) {
-      throw Exception('Generator parse error. Please check sheet column data has correct or not! Maybe someone add more column than you need!');
+    } catch (e) {
+      throw Exception(
+          'Generator parse error. Please check sheet column data has correct or not! Maybe someone add more column than you need!');
     }
   }
 
