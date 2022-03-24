@@ -8,3 +8,5 @@
 - Update version library, update error console log when parse error sheet column data 
 ## 0.0.5
 - Update version library, Using Flutter 2.10.0 
+## 0.0.6
+- Update version analyze 
