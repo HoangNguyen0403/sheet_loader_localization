@@ -10,3 +10,5 @@
 - Update version library, Using Flutter 2.10.0 
 ## 0.0.6
 - Update version analyze 
+## 0.0.7
+- Change build runner example pubspec to older version due to issue from build_runner 2.1.7 and 2.1.8
