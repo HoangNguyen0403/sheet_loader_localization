@@ -14,3 +14,5 @@
 - Change build runner example pubspec to older version due to issue from build_runner 2.1.7 and 2.1.8
 ## 0.0.8
 - Update analyze version to 3.4.1 to fix issue from build_runner
+## 0.0.9
+- Update dependencies library version
