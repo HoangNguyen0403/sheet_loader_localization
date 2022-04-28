@@ -6,7 +6,7 @@ part of 'locale_keys.dart';
 // LocalizationGenerator
 // **************************************************************************
 
-// Generated at: Tue, 08 Feb 2022 12:54:44 +07:00
+// Generated at: Thu, 28 Apr 2022 15:20:29 +07:00
 class LocaleKeys {
   static const supportedLocales = const [
     const Locale('en', 'US'),
