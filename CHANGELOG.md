@@ -16,3 +16,5 @@
 - Update analyze version to 3.4.1 to fix issue from build_runner
 ## 0.0.9
 - Update dependencies library version
+## 0.1.0
+- Upgrade to Flutter 3, using lastest dependencies.

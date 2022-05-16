@@ -10,7 +10,6 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   runApp(EasyLocalization(
-      child: MyApp(),
       supportedLocales: LocaleKeys.supportedLocales,
       path: 'resources/langs/langs.csv',
       // fallbackLocale: Locale('en', 'US'),
@@ -23,7 +22,8 @@ void main() async {
       // assetLoader: RootBundleAssetLoader()
       // assetLoader: HttpAssetLoader()
       // assetLoader: FileAssetLoader()
-      assetLoader: CsvAssetLoader()
+      assetLoader: CsvAssetLoader(),
+      child: MyApp()
       // assetLoader: YamlAssetLoader() //multiple files
       // assetLoader: YamlSingleAssetLoader() //single file
       // assetLoader: XmlAssetLoader() //multiple files
