@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:intl/intl.dart';
-import 'package:source_gen/source_gen.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:csv/csv.dart';
+import 'package:source_gen/source_gen.dart';
 
 import 'sheet_localization.dart';
 
@@ -59,8 +59,7 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
       classBuilder.writeln('}');
       return classBuilder.toString();
     } catch (e) {
-      throw Exception(
-          'Generator parse error. Please check sheet column data has correct or not! Maybe someone add more column than you need!');
+      throw Exception(e);
     }
   }
 
@@ -86,41 +85,61 @@ class _CSVParser {
       : lines = const CsvToListConverter()
             .convert(strings, fieldDelimiter: fieldDelimiter);
 
+  List<dynamic> get _localesSupport => lines.first
+      .sublist(1, lines.first.length)
+      .where((value) => (value as String).isNotEmpty)
+      .toList();
+
+  List<List<dynamic>> get _sheetWithLocaleLines => lines
+      .map((childLine) => childLine.sublist(0, _localesSupport.length + 1))
+      .toList();
+
   String get _supportedLocales {
-    final locales = lines.first.sublist(1, lines.first.length).map((e) {
-      final languages = e.toString().split('_');
+    final locales = _localesSupport.map((currentLocale) {
+      final languages = currentLocale.toString().split('_');
+      if (languages.length < 2) {
+        throw Exception(
+            "You are using wrong locale format. Please check again your wrong value ${currentLocale.toString()}. Correct format is languagesCode_countryCode : en_US");
+      }
       return "const Locale('${languages[0]}', '${languages[1]}')";
     }).toList();
     return 'static const supportedLocales = const [\n${locales.join(',\n')}\n];';
   }
 
   String _getLocaleKeys(List<String?> preservedKeywords) {
-    final oldKeys =
-        lines.getRange(1, lines.length).map((e) => e.first.toString()).toList();
+    final List<String> oldKeys = _sheetWithLocaleLines
+        .getRange(1, _sheetWithLocaleLines.length)
+        .map((e) => e.first.toString())
+        .toList();
+
     final List<String?> keys = [];
     final strBuilder = StringBuffer();
     oldKeys.forEach((element) {
       _reNewKeys(preservedKeywords, keys, element);
     });
     keys.sort();
-    for (int idx = 0; idx < keys.length; idx++) {
-      final group1 = keys[idx]!.split(RegExp(r"[._]"));
-      if (idx == 0) {
-        _groupKey(strBuilder, group1, keys[idx]);
+    for (int index = 0; index < keys.length; index++) {
+      final group1 = (keys[index] ?? "").split(RegExp(r"[._]"));
+      if (index == 0) {
+        _groupKey(strBuilder, group1, keys[index]);
         continue;
       }
-      final group2 = keys[idx - 1]!.split(RegExp(r"[._]"));
-      if (group1[0] != group2[0]) {
-        strBuilder.writeln('\n   // ${group1[0]}');
+      final group2 = (keys[index - 1] ?? "").split(RegExp(r"[._]"));
+      if (group1.isEmpty || group2.isEmpty) {
+        continue;
+      }
+      if (group1.first != group2.first) {
+        strBuilder.writeln('\n   // ${group1.first}');
       }
       strBuilder
-          .writeln('static const ${_joinKey(group1)} = \'${keys[idx]}\';');
+          .writeln('static const ${_joinKey(group1)} = \'${keys[index]}\';');
     }
     return strBuilder.toString();
   }
 
   void _groupKey(StringBuffer strBuilder, List<String> group, String? key) {
-    strBuilder.writeln('\n   // ${group[0]}');
+    if (group.isEmpty) return;
+    strBuilder.writeln('\n   // ${group.first}');
     strBuilder.writeln('static const ${_joinKey(group)} = \'$key\';');
   }
 

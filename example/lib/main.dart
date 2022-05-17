@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontWeight: FontWeight.bold),
             ).tr(args: ['aissat'], gender: _gender ? 'female' : 'male'),
             Text(
-              "",
+              LocaleKeys.title.tr(),
               style: TextStyle(
                   color: Colors.grey.shade600,
                   fontSize: 15,
@@ -137,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(""),
             ElevatedButton(
               onPressed: () {
-                incrementCounter();
+                context.setLocale(const Locale('vi'));
               },
               child: const Text(LocaleKeys.clickMe).tr(),
             ),
