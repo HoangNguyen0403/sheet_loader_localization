@@ -1,15 +1,15 @@
-str,en_US,vi_VN
-title,Hello,Xin chào
-msg,Hello {userName} in the {} world,Xin chào {userName} trong thế giới {}
-msg_named,{} are written in the {lang} language,{} được viết bằng tiếng {lang}
-clickMe,Click me,Bấm vào tôi
-connectTimeout,The connection has timed out. Please try again,The connection has timed out. Please try again
-receiveTimeout,Receive timeout,Receive timeout
-sendTimeout,Send timeout,Send timeout
-pleaseCheckYourInternetConnection,Please check your internet connection.,Please check your internet connection.
-cancelled,Cancelled,Cancelled
-connectionProblem,There are some problems with the connection. Please try again,There are some problems with the connection. Please try again
-addFriends,Add Friends,Thêm bạn bè
-message,Message,Tin nhắn
-more,More,Khác
-editProfile,Edit Profile,Chỉnh sửa hồ sơ
+str,en_US,vi_VN,
+title,Hello,,
+msg,Hello {userName} in the {} world,Xin chào {userName} trong thế giới {},hello
+msg_named,{} are written in the {lang} language,{} được viết bằng tiếng {lang},
+clickMe,Click me,Bấm vào tôi,
+connectTimeout,The connection has timed out. Please try again,The connection has timed out. Please try again,
+receiveTimeout,Receive timeout,Receive timeout,
+sendTimeout,Send timeout,Send timeout,
+pleaseCheckYourInternetConnection,Please check your internet connection.,Please check your internet connection.,
+cancelled,Cancelled,Cancelled,
+connectionProblem,There are some problems with the connection. Please try again,There are some problems with the connection. Please try again,
+addFriends,Add Friends,Thêm bạn bè,
+message,Message,Tin nhắn,
+more,More,Khác,
+editProfile,Edit Profile,Chỉnh sửa hồ sơ,
