@@ -20,3 +20,5 @@
 - Upgrade to Flutter 3, using lastest dependencies.
 ## 0.1.1
 - Customize exception and parsing empty column.
+## 0.1.2
+- Update library dependencies version.
