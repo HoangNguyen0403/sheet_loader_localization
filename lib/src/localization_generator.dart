@@ -1,11 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:intl/intl.dart';
-import 'package:http/http.dart' as http;
-import 'package:path/path.dart' as path;
 import 'package:csv/csv.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+import 'package:path/path.dart' as path;
 import 'package:source_gen/source_gen.dart';
 
 import 'sheet_localization.dart';
@@ -42,15 +44,36 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
             .toList();
         final current = Directory.current;
         final output = Directory.fromUri(Uri.parse(outputDir));
-        final outputPath =
-            Directory(path.join(current.path, output.path, outputFileName));
+        final outputPath = Directory(
+            path.join(current.path, output.path, "$outputFileName.csv"));
 
         final generatedFile = File(outputPath.path);
         if (!generatedFile.existsSync()) {
           generatedFile.createSync(recursive: true);
         }
-        generatedFile.writeAsBytesSync(response.bodyBytes);
-        final csvParser = _CSVParser(response.body);
+
+        final bodyBytes = response.bodyBytes;
+        generatedFile.writeAsBytesSync(bodyBytes);
+
+        final csvParser = _CSVParser(utf8.decode(bodyBytes));
+
+        final generatedJsonFile = File(Directory(
+                path.join(current.path, output.path, "$outputFileName.json"))
+            .path);
+        if (!generatedJsonFile.existsSync()) {
+          generatedJsonFile.createSync(recursive: true);
+        }
+
+        final languages = csvParser.getLanguages();
+        Map<String, Map<String, String>> translations = {};
+        languages
+            .map((e) => {e.toString(): csvParser.getLanguageMap(e)})
+            .forEach((element) => translations.addAll(element));
+
+        var encoder = const JsonEncoder.withIndent("  ");
+        generatedJsonFile
+            .writeAsBytesSync(utf8.encode(encoder.convert(translations)));
+
         classBuilder.writeln(csvParser._supportedLocales);
         classBuilder.writeln(csvParser._getLocaleKeys(preservedKeywords));
       } else {
@@ -162,6 +185,20 @@ class _CSVParser {
     if (!newKeys.contains(key)) {
       newKeys.add(key);
     }
+  }
+
+  List getLanguages() {
+    return lines.first.sublist(1, lines.first.length);
+  }
+
+  Map<String, String> getLanguageMap(String localeName) {
+    final indexLocale = lines.first.indexOf(localeName);
+
+    var translations = <String, String>{};
+    for (var i = 1; i < lines.length; i++) {
+      translations.addAll({lines[i][0]: lines[i][indexLocale]});
+    }
+    return translations;
   }
 
   String _capitalize(String str) =>
