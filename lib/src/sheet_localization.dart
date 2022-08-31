@@ -10,7 +10,7 @@ class SheetLocalization {
     required this.docId,
     this.version = 1,
     this.outDir = 'resources/langs',
-    this.outName = 'langs.csv',
+    this.outName = 'langs',
     this.preservedKeywords = const [],
   });
 }
