@@ -8,6 +8,7 @@ and [easy_localization_loader](https://pub.dev/packages/easy_localization_loader
 
 This tool inspired
 by [flutter_sheet_localization_generator](https://pub.dev/packages/flutter_sheet_localization_generator)
+and the original author [RinLV](https://github.com/rinlv)
 
 ### 🔩 Installation
 
@@ -98,5 +99,4 @@ build runner again.
 
 I find the [easy_localization](https://pub.dev/packages/easy_localization) has
 already [Code generation](https://github.com/aissat/easy_localization/blob/develop/README.md#-code-generation)
-, but it doesn't support working with Google Sheet and generate keys from CSV file and some library don't support flutter 2.0 null-safety. So, I make this
-simple generator tool.
+, but it doesn't support working with Google Sheet and generate keys from CSV file and some library don't support flutter 2.0 null-safety. So, I update this simple generator tool.
