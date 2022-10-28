@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -48,25 +46,25 @@ class LanguageView extends StatelessWidget {
                 context: context,
                 title: 'English',
                 subtitle: 'English',
-                locale: EasyLocalization.of(context)!.supportedLocales[0]),
+                locale: EasyLocalization.of(context)?.supportedLocales[0]),
             buildDivider(),
             buildSwitchListTileMenuItem(
                 context: context,
                 title: 'German',
                 subtitle: 'German',
-                locale: EasyLocalization.of(context)!.supportedLocales[2]),
+                locale: EasyLocalization.of(context)?.supportedLocales[2]),
             buildDivider(),
             buildSwitchListTileMenuItem(
                 context: context,
                 title: 'Русский',
                 subtitle: 'Русский',
-                locale: EasyLocalization.of(context)!.supportedLocales[3]),
+                locale: EasyLocalization.of(context)?.supportedLocales[3]),
             buildDivider(),
             buildSwitchListTileMenuItem(
                 context: context,
                 title: 'Vietnamese',
                 subtitle: 'Vietnamese',
-                locale: EasyLocalization.of(context)!.supportedLocales[4]),
+                locale: EasyLocalization.of(context)?.supportedLocales[4]),
             buildDivider(),
           ],
         ),
@@ -87,7 +85,7 @@ class LanguageView extends StatelessWidget {
     required BuildContext context,
     required String title,
     required String subtitle,
-    required Locale locale,
+    Locale? locale,
   }) {
     return Container(
       margin: const EdgeInsets.only(
@@ -105,8 +103,8 @@ class LanguageView extends StatelessWidget {
             subtitle,
           ),
           onTap: () async {
-            log(locale.toString(), name: toString());
-            context.setLocale(locale); //BuildContext extension method
+            context.setLocale(
+                locale ?? const Locale("en")); //BuildContext extension method
             Navigator.pop(context);
           }),
     );

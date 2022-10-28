@@ -37,10 +37,10 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
       if (response.statusCode == 200) {
         final outputDir = annotation.read('outDir').stringValue;
         final outputFileName = annotation.read('outName').stringValue;
-        final preservedKeywords = annotation
+        final List<String> preservedKeywords = annotation
             .read('preservedKeywords')
             .listValue
-            .map((e) => e.toStringValue())
+            .map((e) => e.toStringValue() ?? "")
             .toList();
         final current = Directory.current;
         final output = Directory.fromUri(Uri.parse(outputDir));
@@ -132,25 +132,25 @@ class _CSVParser {
     return 'static const supportedLocales = const [\n${locales.join(',\n')}\n];';
   }
 
-  String _getLocaleKeys(List<String?> preservedKeywords) {
+  String _getLocaleKeys(List<String> preservedKeywords) {
     final List<String> oldKeys = _sheetWithLocaleLines
         .getRange(1, _sheetWithLocaleLines.length)
         .map((e) => e.first.toString())
         .toList();
 
-    final List<String?> keys = [];
+    final List<String> keys = [];
     final strBuilder = StringBuffer();
     oldKeys.forEach((element) {
       _reNewKeys(preservedKeywords, keys, element);
     });
     keys.sort();
     for (int index = 0; index < keys.length; index++) {
-      final group1 = (keys[index] ?? "").split(RegExp(r"[._]"));
+      final group1 = keys[index].split(RegExp(r"[._]"));
       if (index == 0) {
         _groupKey(strBuilder, group1, keys[index]);
         continue;
       }
-      final group2 = (keys[index - 1] ?? "").split(RegExp(r"[._]"));
+      final group2 = keys[index - 1].split(RegExp(r"[._]"));
       if (group1.isEmpty || group2.isEmpty) {
         continue;
       }
@@ -163,14 +163,14 @@ class _CSVParser {
     return strBuilder.toString();
   }
 
-  void _groupKey(StringBuffer strBuilder, List<String> group, String? key) {
+  void _groupKey(StringBuffer strBuilder, List<String> group, String key) {
     if (group.isEmpty) return;
     strBuilder.writeln('\n   // ${group.first}');
     strBuilder.writeln('static const ${_joinKey(group)} = \'$key\';');
   }
 
   void _reNewKeys(
-      List<String?> preservedKeywords, List<String?> newKeys, String key) {
+      List<String> preservedKeywords, List<String> newKeys, String key) {
     final keys = key.split('.');
     for (int index = 0; index < keys.length; index++) {
       if (index == 0) {
@@ -184,7 +184,7 @@ class _CSVParser {
     }
   }
 
-  void _addNewKey(List<String?> newKeys, String key) {
+  void _addNewKey(List<String> newKeys, String key) {
     if (!newKeys.contains(key)) {
       newKeys.add(key);
     }
