@@ -121,9 +121,9 @@ class _CSVParser {
     final locales = _localesSupport.map((currentLocale) {
       final languages = currentLocale.toString().split('_');
       if (languages.length == 1) {
-        return "const Locale('${languages[0]}')";
+        return "Locale('${languages[0]}')";
       } else if (languages.length == 2) {
-        return "const Locale('${languages[0]}', '${languages[1]}')";
+        return "Locale('${languages[0]}', '${languages[1]}')";
       } else {
         throw Exception(
             "You are using wrong locale format. Please check again your wrong value ${currentLocale.toString()}. Correct format is languagesCode_countryCode : en_US");
