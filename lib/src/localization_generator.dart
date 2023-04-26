@@ -129,7 +129,7 @@ class _CSVParser {
             "You are using wrong locale format. Please check again your wrong value ${currentLocale.toString()}. Correct format is languagesCode_countryCode : en_US");
       }
     }).toList();
-    return 'static const supportedLocales = const [\n${locales.join(',\n')}\n];';
+    return 'static const supportedLocales = [\n${locales.join(',\n')}\n];';
   }
 
   String _getLocaleKeys(List<String> preservedKeywords) {
