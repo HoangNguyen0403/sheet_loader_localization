@@ -1,3 +1,9 @@
+## 0.2.0
+- chore: bump dependencies
+  - flutter_sdk: 3.10.0
+  - intl: ^0.18.0
+  - analyzer: ^5.12.0
+  - build: ^2.4.0
 ## 0.1.3
 - Update minor library dependencies version.
 ## 0.1.2
