@@ -1,0 +1,34 @@
+{
+  "en_US": {
+    "title": "Hello",
+    "msg": "Hello {userName} in the {} world",
+    "msg_named": "{} are written in the {lang} language",
+    "clickMe": "Click me",
+    "connectTimeout": "The connection has timed out. Please try again",
+    "receiveTimeout": "Receive timeout",
+    "sendTimeout": "Send timeout",
+    "pleaseCheckYourInternetConnection": "Please check your internet connection.",
+    "cancelled": "Cancelled",
+    "connectionProblem": "There are some problems with the connection. Please try again",
+    "addFriends": "Add Friends",
+    "message": "Message",
+    "more": "More",
+    "editProfile": "Edit Profile"
+  },
+  "vi_VN": {
+    "title": "Xin chào",
+    "msg": "Xin chào {userName} trong thế giới {}",
+    "msg_named": "{} được viết bằng tiếng {lang}",
+    "clickMe": "Bấm vào tôi",
+    "connectTimeout": "Thời gian kết nối đã quá giờ. Xin thử lại",
+    "receiveTimeout": "Thời gian nhận yêu cầu quá giờ",
+    "sendTimeout": "Thời gian gửi yêu cầu quá giờ",
+    "pleaseCheckYourInternetConnection": "Vui lòng kiểm tra lại kết nối mạng.",
+    "cancelled": "Huỷ bỏ",
+    "connectionProblem": "Có vấn đề với kết nối mạng. Vui long thử lại",
+    "addFriends": "Thêm bạn bè",
+    "message": "Tin nhắn",
+    "more": "Khác",
+    "editProfile": "Chỉnh sửa hồ sơ"
+  }
+}
