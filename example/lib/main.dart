@@ -137,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(""),
             ElevatedButton(
               onPressed: () {
-                context.setLocale(const Locale('vi'));
+                context.setLocale(const Locale('vi', 'VN'));
               },
               child: const Text(LocaleKeysFromCsv.clickMe).tr(),
             ),
