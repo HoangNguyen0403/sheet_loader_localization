@@ -24,7 +24,6 @@ class LocalCsvGenerator extends GeneratorForAnnotation<LocalCsvLocalization> {
       if (!await sourcePath.exists()) {
         String errorMessage = 'Source path does not exist';
 
-        stderr.writeln(errorMessage);
         throw Exception(errorMessage);
       }
 
@@ -39,7 +38,7 @@ class LocalCsvGenerator extends GeneratorForAnnotation<LocalCsvLocalization> {
         //filtering format
         files = files.where((f) => f.path.contains('.csv')).toList();
       }
-
+      stderr.writeln("\nFound files: $files");
       var result = '';
       if (files.isNotEmpty) {
         result = await FileGenerator.generateFile(
