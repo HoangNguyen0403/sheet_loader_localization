@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:example/utils/multi-languages/locale_keys_from_csv.dart';
 import 'package:flutter/material.dart';
 
 import 'lang_view.dart';
-import 'utils/multi-languages/locale_keys.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
   runApp(EasyLocalization(
-      supportedLocales: LocaleKeys.supportedLocales,
+      supportedLocales: LocaleKeysFromCsv.supportedLocales,
       path: 'resources/langs/langs.csv',
       // fallbackLocale: Locale('en', 'US'),
       // startLocale: Locale('de', 'DE'),
@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(LocaleKeys.title).tr(),
+        title: const Text(LocaleKeysFromCsv.title).tr(),
         //Text(AppLocalizations.of(context).tr('title')),
         actions: <Widget>[
           ElevatedButton(
@@ -107,14 +107,14 @@ class _MyHomePageState extends State<MyHomePage> {
               flex: 1,
             ),
             Text(
-              "LocaleKeys.gender",
+              "LocaleKeysFromCsvFromCsvs.gender",
               style: TextStyle(
                   color: Colors.grey.shade600,
                   fontSize: 19,
                   fontWeight: FontWeight.bold),
             ).tr(args: ['aissat'], gender: _gender ? 'female' : 'male'),
             Text(
-              LocaleKeys.title.tr(),
+              LocaleKeysFromCsv.title.tr(),
               style: TextStyle(
                   color: Colors.grey.shade600,
                   fontSize: 15,
@@ -131,15 +131,15 @@ class _MyHomePageState extends State<MyHomePage> {
             const Spacer(
               flex: 1,
             ),
-            const Text(LocaleKeys.msg).tr(args: ['aissat', 'Flutter']),
-            const Text(LocaleKeys.msgNamed)
+            const Text(LocaleKeysFromCsv.msg).tr(args: ['aissat', 'Flutter']),
+            const Text(LocaleKeysFromCsv.msgNamed)
                 .tr(namedArgs: {'lang': 'Dart'}, args: ['Easy localization']),
             const Text(""),
             ElevatedButton(
               onPressed: () {
-                context.setLocale(const Locale('vi'));
+                context.setLocale(const Locale('vi', 'VN'));
               },
-              child: const Text(LocaleKeys.clickMe).tr(),
+              child: const Text(LocaleKeysFromCsv.clickMe).tr(),
             ),
             const SizedBox(
               height: 15,
