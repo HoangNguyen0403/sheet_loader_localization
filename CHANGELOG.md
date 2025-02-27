@@ -1,3 +1,17 @@
+## [0.4.0]
+
+- support Flutter 3.27.4
+- Change dependencies of example 
+  - easy_localization_loader: ^2.0.2
+  - easy_localization: ^3.0.0
+- chore: bump dependencies
+  - build: ^2.4.1
+  - build_config: ^1.1.2
+  - source_gen: ^1.4.0
+  - http: ^1.3.0
+  - path: ^1.9.0
+  - pub_semver: ^2.1.5
+
 ## [0.3.0]
 
 - support Flutter 3.22.0
