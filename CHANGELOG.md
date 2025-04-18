@@ -1,3 +1,8 @@
+## [0.4.1]
+
+- chore: bump dependencies
+  - source_gen: ^2.0.0
+
 ## [0.4.0]
 
 - support Flutter 3.27.4
