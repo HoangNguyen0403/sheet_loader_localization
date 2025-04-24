@@ -13,7 +13,22 @@
     "addFriends": "Add Friends",
     "message": "Message",
     "more": "More",
-    "editProfile": "Edit Profile"
+    "editProfile": "Edit Profile",
+    "forgetPassword": "Forget password?",
+    "password": "Password",
+    "email": "Email",
+    "yourEmail": "Your Email",
+    "login": "Login",
+    "signUp": "Sign-up",
+    "dontHaveAnAccount": "Don't have an account?",
+    "name": "Name",
+    "yourName": "Your Name",
+    "contact": "Contact",
+    "back": "Back",
+    "yourContactNumber": "Your contact number",
+    "submit": "Submit",
+    "OrLoginWith": "Or login with",
+    "logOut": "Log Out"
   },
   "vi_VN": {
     "title": "Xin chào",
@@ -29,6 +44,21 @@
     "addFriends": "Thêm bạn bè",
     "message": "Tin nhắn",
     "more": "Khác",
-    "editProfile": "Chỉnh sửa hồ sơ"
+    "editProfile": "Chỉnh sửa hồ sơ",
+    "forgetPassword": "Quên mật khẩu?",
+    "password": "Mật khẩu",
+    "email": "Email",
+    "yourEmail": "Email của bạn",
+    "login": "Đăng nhập",
+    "signUp": "Đăng ký",
+    "dontHaveAnAccount": "Bạn chưa có tài khoản?",
+    "name": "Tên",
+    "yourName": "Tên của bạn",
+    "contact": "Liên hệ",
+    "back": "Trở về",
+    "yourContactNumber": "Số liên hệ của bạn",
+    "submit": "Xác nhận",
+    "OrLoginWith": "Hoặc đăng nhập với",
+    "logOut": "Đăng xuất"
   }
 }
