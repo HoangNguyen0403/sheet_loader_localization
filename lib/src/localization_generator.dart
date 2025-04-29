@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
@@ -26,64 +27,91 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
         'Content-Type': 'text/csv; charset=utf-8',
         'Accept': '*/*'
       };
-      final response = await http.get(
-          Uri.parse(
-              "https://docs.google.com/spreadsheets/export?format=csv&id=${annotation.read('docId').stringValue}"),
-          headers: headers);
-      final classBuilder = StringBuffer();
-      classBuilder.writeln(
-          '// Generated at: ${_formatDateWithOffset(DateTime.now().toLocal())}');
-      classBuilder.writeln('class ${element.displayName.substring(1)}{');
-      if (response.statusCode == 200) {
-        final outputDir = annotation.read('outDir').stringValue;
-        final outputFileName = annotation.read('outName').stringValue;
-        final List<String> preservedKeywords = annotation
-            .read('preservedKeywords')
-            .listValue
-            .map((e) => e.toStringValue() ?? "")
-            .toList();
-        final current = Directory.current;
-        final output = Directory.fromUri(Uri.parse(outputDir));
-        final outputPath = Directory(
-            path.join(current.path, output.path, "$outputFileName.csv"));
+      final docId = annotation.read('docId').stringValue;
+      final apiKey = annotation.read('apiKey').stringValue;
 
-        final generatedFile = File(outputPath.path);
-        if (!generatedFile.existsSync()) {
-          generatedFile.createSync(recursive: true);
-        }
+      if (docId.isEmpty) {
+        throw Exception('Doc id is required in locale_keys.dart');
+      }
 
-        final bodyBytes = response.bodyBytes;
-        generatedFile.writeAsBytesSync(bodyBytes);
+      final response = apiKey.isNotEmpty
+          ? await http.get(
+              Uri.parse(
+                "https://www.googleapis.com/drive/v3/files/$docId/export?mimeType=text/csv&key=$apiKey",
+              ),
+              headers: headers,
+            )
+          : await http.get(
+              Uri.parse(
+                  "https://docs.google.com/spreadsheets/export?format=csv&id=$docId"),
+              headers: headers,
+            );
 
-        final csvParser = _CSVParser(utf8.decode(bodyBytes));
-
-        final generatedJsonFile = File(Directory(
-                path.join(current.path, output.path, "$outputFileName.json"))
-            .path);
-        if (!generatedJsonFile.existsSync()) {
-          generatedJsonFile.createSync(recursive: true);
-        }
-
-        final languages = csvParser.getLanguages();
-        Map<String, Map<String, String>> translations = {};
-        languages
-            .map((e) => {e.toString(): csvParser.getLanguageMap(e)})
-            .forEach((element) => translations.addAll(element));
-
-        var encoder = const JsonEncoder.withIndent("  ");
-        generatedJsonFile
-            .writeAsBytesSync(utf8.encode(encoder.convert(translations)));
-
-        classBuilder.writeln(csvParser._supportedLocales);
-        classBuilder.writeln(csvParser._getLocaleKeys(preservedKeywords));
-      } else {
+      if (response.statusCode != 200) {
         throw Exception('http reasonPhrase: ${response.reasonPhrase}');
       }
-      classBuilder.writeln('}');
-      return classBuilder.toString();
+
+      return _handleResponseCsv(
+        bodyBytes: response.bodyBytes,
+        element: element,
+        annotation: annotation,
+      );
     } catch (e) {
       throw Exception(e);
     }
+  }
+
+  String _handleResponseCsv({
+    required Uint8List bodyBytes,
+    required Element element,
+    required ConstantReader annotation,
+  }) {
+    final classBuilder = StringBuffer();
+    classBuilder.writeln(
+        '// Generated at: ${_formatDateWithOffset(DateTime.now().toLocal())}');
+    classBuilder.writeln('class ${element.displayName.substring(1)}{');
+    final outputDir = annotation.read('outDir').stringValue;
+    final outputFileName = annotation.read('outName').stringValue;
+    final List<String> preservedKeywords = annotation
+        .read('preservedKeywords')
+        .listValue
+        .map((e) => e.toStringValue() ?? "")
+        .toList();
+    final current = Directory.current;
+    final output = Directory.fromUri(Uri.parse(outputDir));
+    final outputPath =
+        Directory(path.join(current.path, output.path, "$outputFileName.csv"));
+
+    final generatedFile = File(outputPath.path);
+    if (!generatedFile.existsSync()) {
+      generatedFile.createSync(recursive: true);
+    }
+
+    generatedFile.writeAsBytesSync(bodyBytes);
+
+    final csvParser = _CSVParser(utf8.decode(bodyBytes));
+
+    final generatedJsonFile = File(
+        Directory(path.join(current.path, output.path, "$outputFileName.json"))
+            .path);
+    if (!generatedJsonFile.existsSync()) {
+      generatedJsonFile.createSync(recursive: true);
+    }
+
+    final languages = csvParser.getLanguages();
+    Map<String, Map<String, String>> translations = {};
+    languages
+        .map((e) => {e.toString(): csvParser.getLanguageMap(e)})
+        .forEach((element) => translations.addAll(element));
+
+    var encoder = const JsonEncoder.withIndent("  ");
+    generatedJsonFile
+        .writeAsBytesSync(utf8.encode(encoder.convert(translations)));
+
+    classBuilder.writeln(csvParser._supportedLocales);
+    classBuilder.writeln(csvParser._getLocaleKeys(preservedKeywords));
+    classBuilder.writeln('}');
+    return classBuilder.toString();
   }
 
   String _formatDateWithOffset(DateTime date,

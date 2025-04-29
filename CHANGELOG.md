@@ -1,3 +1,7 @@
+## [0.5.0]
+
+- Support private document google sheet for safety
+
 ## [0.4.1]
 
 - chore: bump dependencies
