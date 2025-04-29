@@ -1,8 +1,3 @@
-Here's your updated `README.md` content with the added instructions for handling **private Google Sheets** using an API key:
-
----
-
-```markdown
 # sheet_loader_localization
 
 ## Sheet Localization Generator
@@ -13,8 +8,6 @@ and [easy_localization_loader](https://pub.dev/packages/easy_localization_loader
 
 This tool is inspired by [flutter_sheet_localization_generator](https://pub.dev/packages/flutter_sheet_localization_generator)
 and the original author [RinLV](https://github.com/rinlv).
-
----
 
 ### 🔩 Installation
 
@@ -106,4 +99,3 @@ To force regeneration of the CSV and localization files (due to caching), simply
 ### ❓ Why This Tool?
 
 `easy_localization` supports code generation, but not directly from Google Sheets. This tool simplifies localization workflows by using Google Sheets (ideal for collaboration with non-devs) and supports Flutter null safety.
-```
