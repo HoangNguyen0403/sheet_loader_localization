@@ -1,3 +1,9 @@
+# CHANGELOG
+
+## [0.5.2]
+
+- Resolve intl dependencies version
+
 ## [0.5.1]
 
 - Fix the issue that passing null value on API key will have exception
@@ -14,7 +20,7 @@
 ## [0.4.0]
 
 - support Flutter 3.27.4
-- Change dependencies of example 
+- Change dependencies of example
   - easy_localization_loader: ^2.0.2
   - easy_localization: ^3.0.0
 - chore: bump dependencies
