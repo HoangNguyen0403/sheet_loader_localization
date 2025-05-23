@@ -28,13 +28,15 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
         'Accept': '*/*'
       };
       final docId = annotation.read('docId').stringValue;
-      final apiKey = annotation.read('apiKey').stringValue;
+      final apiKey = annotation.read('apiKey').isNull
+          ? null
+          : annotation.read('apiKey').stringValue;
 
       if (docId.isEmpty) {
         throw Exception('Doc id is required in locale_keys.dart');
       }
 
-      final response = apiKey.isNotEmpty
+      final response = apiKey?.isNotEmpty == true
           ? await http.get(
               Uri.parse(
                 "https://www.googleapis.com/drive/v3/files/$docId/export?mimeType=text/csv&key=$apiKey",
