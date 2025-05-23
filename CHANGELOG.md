@@ -1,3 +1,7 @@
+## [0.5.1]
+
+- Fix the issue that passing null value on API key will have exception
+
 ## [0.5.0]
 
 - Support private document google sheet for safety
