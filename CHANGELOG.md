@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [0.5.3]
+
+- Upgrade intl: ^0.20.2
+  Upgrade analyzer: 7.3.0
+- Upgrade Flutter version to support 3.35.4
+
 ## [0.5.2]
 
 - Resolve intl dependencies version
