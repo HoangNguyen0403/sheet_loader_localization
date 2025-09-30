@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [0.5.3]
+## [0.6.0]
 
 - Upgrade intl: ^0.20.2
   Upgrade analyzer: 7.3.0
