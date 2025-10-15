@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [0.6.1]
+
+- Upgrade build: ^4.0.2
+  Upgrade source_gen: ^4.0.2
+- Upgrade analyzer: ^8.3.0
+
 ## [0.6.0]
 
 - Upgrade intl: ^0.20.2
