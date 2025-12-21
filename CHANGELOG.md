@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## [0.7.0]
+
+- Upgrade version for dependencies:
+    build: ^4.0.3
+    build_config: ^1.2.0
+    source_gen: ^4.1.1
+    http: ^1.6.0
+    path: ^1.9.1
+    analyzer: ^9.0.0
+    file: ^7.0.1  
+    pub_semver: ^2.2.0
+- Upgrade using flutter 3.38.5
+
 ## [0.6.1]
 
 - Upgrade build: ^4.0.2
