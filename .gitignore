@@ -76,3 +76,4 @@ build/
 
 # FVM Version Cache
 .fvm/
+.fvm/fvm_config.json
