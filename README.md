@@ -40,11 +40,10 @@ There are two options:
 
 - **If your Google Sheet is _public_**, keep the setup as-is.
 - **If your Google Sheet is _private_**, follow these steps:
+  1. **Enable Google Drive API and Generate an API Key**  
+     Follow this guide: [How to Use Google Drive API and Get an API Key](https://elfsight.com/blog/how-to-use-google-drive-api-and-get-an-api-key/)
 
-    1. **Enable Google Drive API and Generate an API Key**  
-       Follow this guide: [How to Use Google Drive API and Get an API Key](https://elfsight.com/blog/how-to-use-google-drive-api-and-get-an-api-key/)
-
-    2. **Set the `apiKey` parameter** in the `@SheetLocalization` annotation.
+  2. **Set the `apiKey` parameter** in the `@SheetLocalization` annotation.
 
 ---
 
@@ -95,41 +94,47 @@ Follow the setup guide from the [easy_localization README](https://github.com/ai
 To eliminate the manual toil of translating keys, we provide an **Automation Script** that runs directly inside your Google Sheet. This bridges the gap between creating a key and having it ready for the Dart generator.
 
 #### **Why use the automation script?**
-* **Instant Multi-Language Support**: Translate an entire sheet into 10+ languages (Vietnamese, French, Japanese, etc.) with one click.
-* **Incremental Updates**: Only translate new keys ("Fill Missing"), preserving your existing manual adjustments.
-* **Error Highlighting**: Automatically flags rows that fail to translate in red background for easy debugging.
-* **Zero Configuration**: Automatically detects language codes from your headers (e.g., `vi_VN` → `vi`).
+
+- **Instant Multi-Language Support**: Translate an entire sheet into 10+ languages (Vietnamese, French, Japanese, etc.) with one click.
+- **Incremental Updates**: Only translate new keys ("Fill Missing"), preserving your existing manual adjustments.
+- **Error Highlighting**: Automatically flags rows that fail to translate in red background for easy debugging.
+- **Zero Configuration**: Automatically detects language codes from your headers (e.g., `vi_VN` → `vi`).
 
 #### **Setup Automation**
-1.  In your Google Sheet, go to **Extensions** > **Apps Script**.
-2.  Copy the code from [localization_script.gs](https://github.com/Hoang-Nguyenn/sheet_loader_localization/blob/main/apps_script/localization_script.gs) and paste it into the editor.
-3.  Save the project and refresh your Spreadsheet browser tab.
-4.  A new menu **"🌐 Localization Hub"** will appear in your toolbar.
 
+1. In your Google Sheet, go to **Extensions** > **Apps Script**.
+2. Copy the code from [localization_script.gs](https://github.com/Hoang-Nguyenn/sheet_loader_localization/blob/main/apps_script/localization_script.gs) and paste it into the editor.
+3. Save the project, Click Run button and refresh your Spreadsheet browser tab.
+4. A new menu **"🌐 Localization Hub"** will appear in your toolbar.
+
+![Localization Hub Config](https://github.com/Hoang-Nguyenn/sheet_loader_localization/raw/main/localization_hub_config.png)
 
 ---
 
 ### 🛡️ Security & Privacy (For Engineers)
+
 We prioritize data sovereignty and local execution:
-* **Local Execution**: This script runs entirely within **your** Google Workspace environment (Apps Script). No data is ever sent to third-party servers.
-* **No Data Collection**: We do not collect or track your sheet IDs, translation content, or user identity.
-* **Direct API Usage**: The script uses Google's built-in `LanguageApp`, communicating directly between your sheet and the translation service.
-* **Transparent Code**: 100% open-source. We encourage you to audit the code before adding it to your workflow.
+
+- **Local Execution**: This script runs entirely within **your** Google Workspace environment (Apps Script). No data is ever sent to third-party servers.
+- **No Data Collection**: We do not collect or track your sheet IDs, translation content, or user identity.
+- **Direct API Usage**: The script uses Google's built-in `LanguageApp`, communicating directly between your sheet and the translation service.
+- **Transparent Code**: 100% open-source. We encourage you to audit the code before adding it to your workflow.
 
 ---
 
 ### ⏱️ Productivity Comparison
 
-| Task | Manual Workflow | With This Tool & Script |
-| :--- | :--- | :--- |
-| **Adding a new key (5 languages)** | ~10 mins (Manual Copy/Paste) | **< 10 seconds** |
-| **Fixing translation errors** | Manual search & fix | **"Translate Selected" (2 clicks)** |
-| **Handling placeholders** | High risk of breaking `{var}` | **Preserved via script logic** |
-| **Security Audit** | Unknown 3rd party apps | **100% Transparent Script** |
+| Task                               | Manual Workflow               | With This Tool & Script             |
+| :--------------------------------- | :---------------------------- | :---------------------------------- |
+| **Adding a new key (5 languages)** | ~10 mins (Manual Copy/Paste)  | **< 10 seconds**                    |
+| **Fixing translation errors**      | Manual search & fix           | **"Translate Selected" (2 clicks)** |
+| **Handling placeholders**          | High risk of breaking `{var}` | **Preserved via script logic**      |
+| **Security Audit**                 | Unknown 3rd party apps        | **100% Transparent Script**         |
 
 ---
 
 ### 🛠 Troubleshooting
+
 **Ghosting Menus**: If you see duplicate menus (like "Translation Tools" and "Localization Hub") after updating the script, simply refresh your browser tab. Google Sheets caches UI elements; a reload clears the old definitions.
 
 ### ⚡ Regeneration

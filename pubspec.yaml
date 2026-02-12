@@ -1,6 +1,6 @@
 name: sheet_loader_localization
 description: Download an CSV file and generates the localization keys from an online Google Sheet.
-version: 0.7.0
+version: 1.0.0
 homepage: https://github.com/Hoang-Nguyenn
 repository: https://github.com/Hoang-Nguyenn/sheet_loader_localization
 issue_tracker: https://github.com/Hoang-Nguyenn/sheet_loader_localization/issues
@@ -11,14 +11,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  build: ^4.0.3
+  build: ^4.0.4
   build_config: ^1.2.0
-  source_gen: ^4.1.1
+  source_gen: ^4.2.0
   http: ^1.6.0
   path: ^1.9.1
   csv: ^6.0.0
   intl: ^0.20.2
-  analyzer: ^9.0.0
+  analyzer: ^10.0.1
   file: ^7.0.1
   pub_semver: ^2.2.0
 

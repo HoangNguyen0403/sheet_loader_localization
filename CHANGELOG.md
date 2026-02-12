@@ -1,17 +1,25 @@
 # CHANGELOG
 
+## [1.0.0]
+
+- Introduce app script Localization hub for quick translation variant language with just one click
+- Upgrade version for dependencies:
+  build: ^4.0.4
+  source_gen: ^4.2.0
+  analyzer: ^10.0.1
+- Upgrade using flutter 3.38.9
+
 ## [0.7.0]
 
 - Upgrade version for dependencies:
-    build: ^4.0.3
-    build_config: ^1.2.0
-    source_gen: ^4.1.1
-    http: ^1.6.0
-    path: ^1.9.1
-    analyzer: ^9.0.0
-    file: ^7.0.1  
-    pub_semver: ^2.2.0
-- Upgrade using flutter 3.38.5
+  build: ^4.0.3
+  build_config: ^1.2.0
+  source_gen: ^4.1.1
+  http: ^1.6.0
+  path: ^1.9.1
+  analyzer: ^9.0.0
+  file: ^7.0.1  
+  Upgrade using flutter 3.38.5
 
 ## [0.6.1]
 
