@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [1.0.1]
+
+- Enhance localization script with smart duplicate management UI
+- Improved error highlighting in the script
+
 ## [1.0.0]
 
 - Introduce app script Localization hub for quick translation variant language with just one click
