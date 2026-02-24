@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.0.1]
+## [1.1.0]
 
 - Enhance localization script with smart duplicate management UI
 - Improved error highlighting in the script
