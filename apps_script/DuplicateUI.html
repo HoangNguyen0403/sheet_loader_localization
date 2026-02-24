@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+  <head>
+    <base target="_top" />
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        padding: 20px;
+        color: #3c4043;
+        line-height: 1.4;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+      .option {
+        margin-bottom: 18px;
+      }
+      button {
+        background: #1a73e8;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: 500;
+        margin-top: 10px;
+      }
+      button:disabled {
+        background: #ccc;
+      }
+      .desc {
+        font-size: 11px;
+        color: #70757a;
+        display: block;
+        margin-top: 4px;
+      }
+      .note {
+        font-size: 12px;
+        background: #fef7e0;
+        padding: 12px;
+        border-radius: 4px;
+        border-left: 4px solid #fbbc04;
+        margin: 20px 0;
+      }
+      .summary-box {
+        display: none;
+        background: #e8f0fe;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #1a73e8;
+      }
+      .stat-item {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+        font-size: 14px;
+      }
+      hr {
+        border: 0;
+        border-top: 1px solid #d2e3fc;
+        margin: 10px 0;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="setupView">
+      <div class="option">
+        <label
+          ><input type="checkbox" id="full" checked />
+          <b>Auto-delete Entirely Identical Rows</b></label
+        >
+        <span class="desc"
+          >If Key + All Translations are exactly the same.</span
+        >
+      </div>
+
+      <div class="option">
+        <label
+          ><input type="checkbox" id="keys" />
+          <b>Auto-delete Duplicate Keys</b></label
+        >
+        <span class="desc"
+          >Keep the first version, delete later ones even if translations
+          differ.</span
+        >
+      </div>
+
+      <div class="note">
+        <b>Note:</b> Duplicate English values with different keys will only be
+        <b>Highlighted</b> (Manual check required).
+      </div>
+
+      <button id="mainBtn" onclick="runProcess()">
+        Run Cleanup & Highlight
+      </button>
+    </div>
+
+    <div id="resultView" class="summary-box">
+      <h3 style="margin-top: 0; color: #1a73e8">✅ Cleanup Complete</h3>
+      <div class="stat-item">
+        <span>Identical rows deleted:</span> <b id="statIdentical">0</b>
+      </div>
+      <div class="stat-item">
+        <span>Duplicate keys deleted:</span> <b id="statKeys">0</b>
+      </div>
+      <div class="stat-item">
+        <span>Rows highlighted for review:</span> <b id="statHighlight">0</b>
+      </div>
+      <hr />
+      <div class="stat-item" style="font-size: 16px">
+        <span>Total Rows Removed:</span> <b id="statTotal">0</b>
+      </div>
+      <button style="background: #5f6368" onclick="google.script.host.close()">
+        Close Manager
+      </button>
+    </div>
+
+    <script>
+      function runProcess() {
+        const btn = document.getElementById('mainBtn');
+        btn.disabled = true;
+        btn.innerText = '⏳ Processing Sheets...';
+
+        const options = {
+          deleteFull: document.getElementById('full').checked,
+          deleteKeys: document.getElementById('keys').checked,
+        };
+
+        google.script.run
+          .withSuccessHandler((res) => {
+            if (res.success) {
+              document.getElementById('setupView').classList.add('hidden');
+              document.getElementById('resultView').style.display = 'block';
+
+              document.getElementById('statIdentical').innerText =
+                res.stats.identical;
+              document.getElementById('statKeys').innerText = res.stats.keys;
+              document.getElementById('statHighlight').innerText =
+                res.stats.highlighted;
+              document.getElementById('statTotal').innerText = res.totalDeleted;
+            }
+          })
+          .withFailureHandler((err) => alert('Error: ' + err))
+          .processDuplicates(options);
+      }
+    </script>
+  </body>
+</html>
